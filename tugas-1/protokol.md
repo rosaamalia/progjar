@@ -40,7 +40,7 @@ TUJUAN: melayani client dalam request file server
     - status: ERROR
     - data: pesan kesalahan
 
-**UPLOAD**
+**POST**
 * TUJUAN: untuk mengirim data file ke folder `/files` dengan menyebutkan nama file di paramater
 * PARAMETER:
   - PARAMETER1: nama file

@@ -63,8 +63,8 @@ def remote_get(filename=""):
     else:
         print("Gagal")
         return False
-    
-def remote_upload(filename=""):
+
+def remote_post(filename=""):
     # cek file ada atau tidak
     if (os.path.exists(filename) == False):
         logging.warning(f"File {filename} tidak tersedia")
@@ -75,7 +75,7 @@ def remote_upload(filename=""):
     data = base64.b64encode(fp.read()).decode()
     
     # kirim command dengan file yang sudah di-decode
-    command_str=f"UPLOAD {filename} {data}"
+    command_str=f"POST {filename} {data}"
     hasil = send_command(command_str)
     
     if (hasil['status']=='OK'):
@@ -99,10 +99,9 @@ def remote_delete(filename=""):
         print(f"Gagal menghapus file {filename}")
         return False
 
+
 if __name__=='__main__':
     server_address=('172.16.16.101',6666)
     # remote_list()
-    # remote_get('blekping.png')
-    remote_upload('pokijan.jpg')
-    # remote_delete('blekping.png')
-
+    # remote_get('donalbebek.jpg')
+    remote_post("pokijan.jpg")

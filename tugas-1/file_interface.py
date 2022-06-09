@@ -8,37 +8,37 @@ class FileInterface:
     def __init__(self):
         os.chdir('files/')
 
-    def list(self, params=[]):
+    def list(self,params=[]):
         try:
             filelist = glob('*.*')
-            return dict(status='OK', data=filelist)
+            return dict(status='OK',data=filelist)
         except Exception as e:
-            return dict(status='ERROR', data=str(e))
+            return dict(status='ERROR',data=str(e))
 
-    def get(self, params=[]):
+    def get(self,params=[]):
         try:
             filename = params[0]
             if (filename == ''):
                 return None
-            fp = open(f"{filename}", 'rb')
+            fp = open(f"{filename}",'rb')
             isifile = base64.b64encode(fp.read()).decode()
-            return dict(status='OK', data_namafile=filename, data_file=isifile)
+            return dict(status='OK',data_namafile=filename,data_file=isifile)
         except Exception as e:
-            return dict(status='ERROR', data=str(e))
+            return dict(status='ERROR',data=str(e))
         
-    def upload(self, params=[]):
+    def post(self, params=[]):
         try:
             # nama file
             filename = params[0]
             # data file
             datafile = params[1]
-            
+
             # menulis kembali file ke folder /files
-            isifile = base64.b64decode(datafile)
+            isifile = base64.b64decode(datafile + '===')
             fp = open(filename, 'wb+')
             fp.write(isifile)
             fp.close()
-            
+
             return dict(status='OK')
         except Exception as e:
             return dict(status='ERROR', data=str(e))
@@ -54,8 +54,9 @@ class FileInterface:
             return dict(status='OK')
         except Exception as e:
             return dict(status='ERROR', data=str(e))
-        
-        
+
+
+
 if __name__=='__main__':
     f = FileInterface()
     print(f.list())
